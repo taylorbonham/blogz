@@ -1,26 +1,40 @@
 
 {% extends "base.html" %}
+
+
+
 {% block content %}
 
-   <center><h1>Build a Blog</h1></center>
+      <div>
 
-    <ul>
-        {% for entry in all_entries %}
 
-            <li>
-                <h2>
-                    <a href="/blog?id={{ entry.id }}">{{ entry.title }}</a>
-                </h2>
-                <p>{{ entry.body }}</p>
-                <p><br><b>(Do you wish to delete this post?)</b></p>
-                <form action="/delete-post" method="POST" style="display:inline-block;">
-                    <input type="hidden" name="entry-id" value="{{entry.id}}" />
-                    <input type="submit" value="Delete Post" />
-                </form>
-            </li>
 
-        {% endfor %}
+        <h1>All Blog Posts</h1>
 
-    </ul>
+
+
+        <hr>
+
+
+
+          {% for blog in blogs %}
+
+          <div>
+
+
+
+            <a href="/blog?id={{blog.id}}"><p><h2>{{ blog.title }}</h2></p></a>
+
+            <p>{{ blog.body }}</p>
+
+            <p>Written by: <a href="/blog?userid={{blog.owner_id}}">{{ blog.owner.username }}</a></p>
+
+
+
+          </div>
+
+          {% endfor %}
+
+      </div>
 
 {% endblock %}
